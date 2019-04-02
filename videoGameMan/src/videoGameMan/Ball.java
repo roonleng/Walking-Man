@@ -17,13 +17,8 @@ public class Ball extends JComponent
 	
 	public Ball(int x, int y)
 	{
-		int  xC= x;
-		int yC= y;
-		ball = new Ellipse2D.Double(xC, yC, 10, 10);
-		//if fit to a 10 pixel grid, the invisible grid for it is too snug and it cuts off the circle at the right and bottom
-		//this.setSize(10, 10);
-		//'this' defines the implicit parameter, or the object that is going to run the method.
-		this.setSize(11, 11);
+		setBounds(x, y, 11, 11);
+		ball = new Ellipse2D.Double(0, 0, 10, 10);
 	}
 	//methods
 	//argument is always a graphic 2d object; it is casted into a graphics 2d object and stored into a graphics 2d variable

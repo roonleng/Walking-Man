@@ -86,7 +86,7 @@ public class WalkingManMain extends JFrame implements ActionListener
 			{
 				if(e.getKeyCode() == e.VK_SPACE)
 				{
-					Ball ball = new Ball( (man.getX()), (man.getY()));
+					Ball ball = new Ball(man.getX(), man.getY());
 					balls.add(ball);
 					add(ball);
 				}
@@ -115,15 +115,22 @@ public class WalkingManMain extends JFrame implements ActionListener
 				man.update();
 				repaint();
 			}
-			for(int i = 0; i <balls.size(); i++)
+			for( Ball ball : balls)
 			{
-				balls.get(i).update(); 
-				if(balls.get(i).getX()> getX())
+				ball.update();
+			}
+			
+			for(int i = balls.size(); i >=0; i--)
+			{
+				if(balls.get(i).getX()> this.getX())
 				{
-					remove(balls.get(i));
-					balls.remove(balls.get(i));
+					Ball thisBall=balls.get(i);
+					remove(thisBall);
+					balls.remove(thisBall);
 				}
 			}
+			
+			
 	}
 	
 	public static void main(String[] args) 
