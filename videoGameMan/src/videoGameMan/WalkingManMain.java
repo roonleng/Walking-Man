@@ -22,9 +22,7 @@ public class WalkingManMain extends JFrame implements ActionListener
 		setBounds(30, 30, 300, 300);
 		man.setBounds(10, 10, 100, 100);
 		add(man);
-		setVisible(true);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+		
 		Timer timer = new Timer(10, this);
 		timer.start();
 		
@@ -47,6 +45,12 @@ public class WalkingManMain extends JFrame implements ActionListener
 				else if(e.getKeyCode() == e.VK_RIGHT)
 				{
 					man.setDX(2);
+				}
+				else if(e.getKeyCode() == e.VK_SPACE)
+				{
+					Ball ball = new Ball(man.getX(), man.getY());
+					balls.add(ball);
+					add(ball);
 				}
 			
 			}
@@ -79,33 +83,10 @@ public class WalkingManMain extends JFrame implements ActionListener
 			}
 			
 		});
-		
-		addKeyListener(new KeyListener()
-		{
-			public void keyPressed(KeyEvent e)
-			{
-				if(e.getKeyCode() == e.VK_SPACE)
-				{
-					Ball ball = new Ball(man.getX(), man.getY());
-					balls.add(ball);
-					add(ball);
-				}
-			}
-			@Override
-			public void keyReleased(KeyEvent e) 
-			{
+		setVisible(true);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 				
-				
-			}
-			
-			public void keyTyped(KeyEvent arg0) 
-			{
-				
-			}
-			
-		});
-		
-		
 	}
 	
 	public void actionPerformed(ActionEvent arg0) 
@@ -113,24 +94,19 @@ public class WalkingManMain extends JFrame implements ActionListener
 			if (0<(man.getX()+man.getDX()) && (man.getX()+20+ man.getDX())<this.getWidth()-8 && ((0<man.getY()+man.getDY()) && (man.getY()+36+man.getDY()<this.getHeight()-32) ))
 			{
 				man.update();
-				repaint();
-			}
-			for( Ball ball : balls)
-			{
-				ball.update();
 			}
 			
-			for(int i = balls.size(); i >=0; i--)
+			for(int i = balls.size()-1; i >=0; i--)
 			{
-				if(balls.get(i).getX()> this.getX())
+				Ball checkBall = balls.get(i);
+				if(checkBall.getX()> this.getWidth())
 				{
-					Ball thisBall=balls.get(i);
-					remove(thisBall);
-					balls.remove(thisBall);
+					remove(checkBall);
+					balls.remove(checkBall);
 				}
+				checkBall.update();
 			}
-			
-			
+			repaint();
 	}
 	
 	public static void main(String[] args) 

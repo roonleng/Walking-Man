@@ -11,8 +11,8 @@ import javax.swing.JComponent;
 public class Ball extends JComponent
 {
 	//fields
-	private Ellipse2D.Double ball;
-	
+	private Ellipse2D ball;
+	private int dx =3, dy = 0;
 	//constructor
 	
 	public Ball(int x, int y)
@@ -25,8 +25,9 @@ public class Ball extends JComponent
 	public void paintComponent(Graphics g)
 	{
 		Graphics2D g2 = (Graphics2D) g;
-		g2.draw(ball);
+		
 		g2.setColor(Color.DARK_GRAY);
+		g2.fill(ball);
 	}
 	public void update()
 	{
